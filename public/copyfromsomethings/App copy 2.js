@@ -12,13 +12,13 @@ function App() {
         id: 1,
         text:'hej hej',
         day:'Fep 6th at 2:30pm',
-        reminder: null,
+        reminder: true,
     },
     {
         id: 2,
         text:'farvel farvel',
         day:'Sep 6th at 2:30pm',
-        reminder: null,
+        reminder: false,
     }
 ]);
 
@@ -28,18 +28,12 @@ const deleteTask = (id) =>{
 }
 
 
-// Toggle reminder
-const toggleReminder = (id) => {
-  setTasks(tasks.map((task) => task.id === id ? { ...task, reminder : !task.reminder} : task))
-
-}
-
 
 
   return (
     <div className="container">
       <Header/>
-      {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask}  onToggle={toggleReminder}/> : ' No Tasks To Show ' }
+      {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} /> : ' No Tasks To Show ' }
     </div>
   );
 }
