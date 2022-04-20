@@ -2,14 +2,10 @@
 
 
 
-
-
  const AddTask = () => {
   return (
-    <form className="add-form">
-        
-
-
+    <form className="add-form" >
+      
     <div className="form-control">
     <label> Task </label>
     <input type='text' placeholder='Add Task'/>
@@ -17,13 +13,15 @@
 
     <div className="form-control">
     <label> Day & Time </label>
-    <input type='text' placeholder='Add Day'/>
+    <input type='text' placeholder='Add Day and time'/>
     </div>
 
-    <div className="form-control">
+    <div className="form-control form-control-check" >
     <label> Set Reminder </label>
-    <input type='checkbox' />
+    <input type='checkbox'  />
     </div>
+
+    <input type='submit' value='Save Task ' className="btn btn-block" style={{backgroundColor:'green'}}/>
 
     </form>
   )
