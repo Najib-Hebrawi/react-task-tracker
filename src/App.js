@@ -8,6 +8,9 @@ import { useState} from 'react';
 
 function App() {
 
+  //  another state to add button, to show the lale to add button.
+  const [showAddTask, setShowAddTask] = useState(false);
+
   // thise  here is app level state.
   const [tasks, setTasks] = useState([
     {
@@ -47,8 +50,8 @@ const toggleReminder = (id) => {
 
   return (
     <div className="container">
-      <Header/>
-      <AddTask onAdd={addTask}/>
+      <Header onAdd={() => setShowAddTask (!showAddTask)}/>
+      {showAddTask &&  <AddTask onAdd={addTask}/>}
       {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask}  onToggle={toggleReminder}/> : ' No Tasks To Show ' }
     </div>
   );
