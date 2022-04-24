@@ -12,20 +12,7 @@ function App() {
   const [showAddTask, setShowAddTask] = useState(false);
 
   // thise  here is app level state.
-  const [tasks, setTasks] = useState([
-    {
-        id: 1,
-        text:'hej hej',
-        day:'Fep 6th at 2:30pm',
-        reminder: null,
-    },
-    {
-        id: 2,
-        text:'farvel farvel',
-        day:'Sep 6th at 2:30pm',
-        reminder: null,
-    }
-]);
+  const [tasks, setTasks] = useState([]);
 
 // Add Task //  that will give me a random number of id.
 const addTask = (task) => {
