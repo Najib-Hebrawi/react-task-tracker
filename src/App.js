@@ -8,6 +8,7 @@ import { useState} from 'react';
 
 function App() {
 
+  // thise  here is app level state.
   const [tasks, setTasks] = useState([
     {
         id: 1,
@@ -22,6 +23,13 @@ function App() {
         reminder: null,
     }
 ]);
+
+// Add Task //  that will give me a random number of id.
+const addTask = (task) => {
+  const id = Math.floor(Math.random() * 10000) + 1
+  const newTask = { id, ...task}
+  setTasks([...tasks, newTask])
+}
 
 // delete task
 const deleteTask = (id) =>{
@@ -40,7 +48,7 @@ const toggleReminder = (id) => {
   return (
     <div className="container">
       <Header/>
-      <AddTask/>
+      <AddTask onAdd={addTask}/>
       {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask}  onToggle={toggleReminder}/> : ' No Tasks To Show ' }
     </div>
   );
