@@ -32,13 +32,27 @@ function App() {
     return data
   }
 
+  // Fetch Task by ID
+  const fetchTask = async (id) => {
+    const res = await fetch(`http://localhost:8000/tasks/${id}`)
+    const data = await res.json()
+
+    return data
+  }
+
 
 
 // Add Task //  that will give me a random number of id.
-const addTask = (task) => {
-  const id = Math.floor(Math.random() * 10000) + 1
-  const newTask = { id, ...task}
-  setTasks([...tasks, newTask])
+const addTask = async (task) => {
+  const res = await fetch('http://localhost:8000/tasks', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json', // we add a headers because we need to specify our content type .
+    },
+    body: JSON.stringify(task), // turn it from javascript object into a json string. and we are sending task
+  })
+  const data = await res.json() // save the data in data
+  setTasks([...tasks, data]) // ...tasks: means we are going to take the existing tasks and then we are going to add on to it data which is the new task that was just created
 }
 
 // delete task
@@ -48,11 +62,29 @@ const deleteTask = async (id) => {
 }
  
 
-// Toggle reminder
-const toggleReminder = (id) => {
-  setTasks(tasks.map((task) => task.id === id ? { ...task, reminder : !task.reminder} : task))
+// Toggle Reminder
+const toggleReminder = async (id) => {
+  const taskToToggle = await fetchTask(id) // getting a task by id
+  const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder } // put it(a task we just fetchet) in a variable
 
+  const res = await fetch(`http://localhost:8000/tasks/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify(updTask),
+  })
+
+  const data = await res.json()
+
+  setTasks(
+    tasks.map((task) =>
+      task.id === id ? { ...task, reminder: data.reminder } : task
+    )
+  )
 }
+
+
 
 
 
